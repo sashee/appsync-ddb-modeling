@@ -1,0 +1,34 @@
+type User {
+	id: ID!
+	name: String!
+	paired_with: User
+	group: Group!
+	last_active: AWSDate!
+	status: String!
+}
+
+type PaginatedUsers {
+	users: [User!]!
+	nextToken: String
+}
+
+type Group {
+	id: ID!
+	name: String!
+	users(count: Int, nextToken: String): PaginatedUsers!
+	users_filtered(status: String, count: Int, nextToken: String): PaginatedUsers!
+	users_filtered_inefficent(status: String, count: Int, nextToken: String): PaginatedUsers!
+}
+
+type Query {
+	groupById(id: String!): Group
+}
+
+type Mutation {
+	pairUsers(user1: ID!, user2: ID!): ID!
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}
