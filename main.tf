@@ -60,13 +60,13 @@ resource "aws_dynamodb_table" "user" {
   global_secondary_index {
     name            = "groupId"
     hash_key        = "group_id"
-		range_key = "last_active"
+    range_key       = "last_active"
     projection_type = "ALL"
   }
   global_secondary_index {
     name            = "groupIdStatus"
     hash_key        = "group_id#status"
-		range_key = "last_active"
+    range_key       = "last_active"
     projection_type = "ALL"
   }
 }
