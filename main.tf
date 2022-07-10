@@ -492,3 +492,7 @@ EOF
 $util.toJson($ctx.result)
 EOF
 }
+
+output "users_table" {
+  value = aws_dynamodb_table.user.id
+}
