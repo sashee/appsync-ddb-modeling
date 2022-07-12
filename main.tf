@@ -378,7 +378,12 @@ resource "aws_appsync_resolver" "Group_users_filtered" {
 				"#groupIdStatus": "group_id#status"
 			},
 			"expressionValues" : {
-				":groupIdStatus" : {"S": "$util.escapeJavaScript($ctx.source.id)#$util.escapeJavaScript($ctx.args.status)"}
+#set($groupIdStatus =
+	$util.escapeJavaScript($ctx.source.id) +
+	"#" +
+	$util.escapeJavaScript($ctx.args.status)
+)
+				":groupIdStatus" : {"S": "$groupIdStatus"}
 			}
 		},
 		"limit": $util.toJson($ctx.args.count),
